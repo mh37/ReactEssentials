@@ -6,7 +6,7 @@ function Todolist(){
     const [todos, setTodos] = useState([]);
 
     const addTodo = () => {
-        setTodos([...todos, todo]);
+        setTodos([todo, ...todos]);
         setTodo({description:'', date:''});
     }
 
@@ -14,13 +14,9 @@ function Todolist(){
         setTodo({...todo, [event.target.name]: event.target.value})
     }
 
-    const deleteTodo = (row) => {
-        setTodos(todos.filter((todo, index) =>index !== row));
-    }
-
     return(
         <div>
-            <h1>Assignment 17 - Todolist (Split Components)</h1>
+            <h1>Assignment 15 - Todolist</h1>
             Description
             <input 
                 type="text" 
@@ -46,9 +42,10 @@ function Todolist(){
                     {
                         todos.map((todos, index) =>
                             <tr key={index}> 
+                                <td><input type="checkbox"/></td>
                                 <td>{todos.date}</td>
                                 <td>{todos.description}</td>
-                                <td><button onClick={() => deleteTodo(index)}>Delete</button></td>
+                                <td></td>
                             </tr>
                         )
                     }
