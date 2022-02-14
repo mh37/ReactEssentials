@@ -20,7 +20,8 @@ function Todolist(){
 
     return(
         <div>
-            <h1>Assignment 17 - Todolist (Split Components)</h1>
+            <h1>Assignment 16 - Todolist (w. Delete)</h1>
+            
             Description
             <input 
                 type="text" 

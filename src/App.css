@@ -28,6 +28,10 @@ table{
   margin: auto;
 }
 
+.crossed-line {
+  text-decoration: line-through;
+}
+
 .App-link {
   color: #61dafb;
 }
