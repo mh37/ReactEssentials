@@ -1,10 +1,9 @@
 
 import './App.css';
-import Todolist from './components/Todolist';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-
+import NavTabs from './components/NavTabs';
 
 
 function App() {
@@ -18,7 +17,7 @@ function App() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Todolist />
+      <NavTabs />
     </div>
   );
 }
