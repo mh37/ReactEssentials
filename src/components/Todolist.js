@@ -7,7 +7,11 @@ import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddBoxIcon from '@mui/icons-material/AddBox';
-
+import DateFnsUtils from '@date-io/date-fns';
+import {
+    DatePicker,
+    MuiPickersUtilsProvider,
+  } from '@material-ui/pickers';
 
 
 import 'ag-grid-community/dist/styles/ag-grid.css';
@@ -15,10 +19,15 @@ import 'ag-grid-community/dist/styles/ag-theme-material.css';
 
 function Todolist(){
 
-    const [todo, setTodo] = useState({description:'', date:''});
-    const [todos, setTodos] = useState([]);
-    
+    const [todo, setTodo] = useState({description:'', date:'', priority:''});
+    const [todos, setTodos] = useState([]);   
     const gridRef = useRef();
+    const [selectedDate, setSelectedDate] = useState(null);
+
+    const handleDateChange = (inputDate) => {
+        setSelectedDate(inputDate);
+        setTodo({...todo, date: inputDate.toISOString()});
+    };
 
     const columns = [
         {field: 'description', sortable: true},
@@ -29,11 +38,12 @@ function Todolist(){
 
     const addTodo = () => {
         setTodos([...todos, todo]);
-        setTodo({description:'', date:''});
+        setTodo({description:'', date:'', priority:''});
+        setSelectedDate(null);
     }
 
-    const inputChanged = (event) => {
-        setTodo({...todo, [event.target.name]: event.target.value})
+    const textInputChanged = (event) => {
+        setTodo({...todo, [event.target.name]: event.target.value});
     }
 
     const deleteTodo = () => {
@@ -57,21 +67,23 @@ function Todolist(){
                     name="description"
                     variant="standard"
                     value={todo.description}
-                    onChange={inputChanged}
+                    onChange={textInputChanged}
                 />
-                <TextField  
-                    label='Date'
-                    name="date"
-                    variant="standard"
-                    value={todo.date}
-                    onChange={inputChanged}
-                />
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <DatePicker 
+                        name="date"
+                        label='Date'
+                        variant="standard"
+                        value={selectedDate} 
+                        onChange={handleDateChange}
+                    />
+                </MuiPickersUtilsProvider>
                 <TextField  
                     label='Priority'
                     name="priority"
                     variant="standard"
                     value={todo.priority}
-                    onChange={inputChanged}
+                    onChange={textInputChanged}
                 />
                 <IconButton 
                     variant="contained" 
@@ -83,20 +95,21 @@ function Todolist(){
                 <Tooltip title="Select row to delete">
                     <IconButton 
                         aria-label="delete" 
-                        color="error">
+                        color="error"
+                        onClick={deleteTodo}>    
                         <DeleteIcon />
                     </IconButton>
                 </Tooltip>
             </Stack>
             <div className="ag-theme-material" style={{height: 400, width: 800, margin: 'auto'}}>
                 <AgGridReact
-                ref={gridRef}
-                onGridReady={params => gridRef.current = params.api}
-                rowSelection='single'
-                rowData={todos}
-                animateRows={true}
-                columnDefs={columns}>
-            </AgGridReact>
+                    ref={gridRef}
+                    onGridReady={params => gridRef.current = params.api}
+                    rowSelection='single'
+                    rowData={todos}
+                    animateRows={true}
+                    columnDefs={columns}>
+                </AgGridReact>
             </div>
 
         </div>
