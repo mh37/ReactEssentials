@@ -4,8 +4,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Todolist from './Trainings';
-import Welcome from './Customers';
+import TrainingList from './TrainingList';
+import CustomerList from './CustomerList';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -56,10 +56,10 @@ function NavTabs() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <Welcome />
+        <CustomerList />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Todolist />
+        <TrainingList />
       </TabPanel>
     </Box>
   );
