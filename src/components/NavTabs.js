@@ -4,8 +4,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Todolist from './Todolist';
-import Welcome from './Welcome';
+import Todolist from './Trainings';
+import Welcome from './Customers';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -51,8 +51,8 @@ function NavTabs() {
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="Home" {...a11yProps(0)} />
-          <Tab label="Todos" {...a11yProps(1)} />
+          <Tab label="Customers" {...a11yProps(0)} />
+          <Tab label="Trainings" {...a11yProps(1)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
