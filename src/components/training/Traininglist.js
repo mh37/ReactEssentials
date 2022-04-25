@@ -8,6 +8,7 @@ import Edittraining from './Edittraining';
 
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
+import dayjs from 'dayjs';
 
 
 
@@ -83,10 +84,27 @@ function Traininglist(){
     }
 
     const [columns] = useState([
-        {field: "date", sortable: true, filter: true, width: 150},
+        {
+            field: "date", 
+            sortable: true, 
+            filter: true, 
+            width: 150,
+            cellRenderer: params => {
+                return dayjs(params.value).format('DD/MM/YYYY');
+            }
+        },
         {field: "duration", sortable: true, filter: true, width: 150},
         {field: "activity", sortable: true, filter: true, width: 200},
-        {field: "customer", sortable: true, filter: true, width: 200},
+        {
+            headerName: 'Customer',
+            field: 'links', 
+            sortable: true, 
+            filter: true, 
+            width: 200,
+            cellRenderer: params => {
+                return params.value[2].href;
+            }
+        },
         {
             headerName: '',
             width: 100,

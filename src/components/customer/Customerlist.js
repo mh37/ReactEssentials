@@ -83,23 +83,23 @@ function Customerlist(){
     }
 
     const [columns] = useState([
-        {field: "firstname", sortable: true, filter: true, width: 150},
-        {field: "lastname", sortable: true, filter: true, width: 150},
-        {field: "streetaddress", sortable: true, filter: true, width: 150},
-        {field: "postcode", sortable: true, filter: true, width: 150},
-        {field: "city", sortable: true, filter: true, width: 100},
-        {field: "email", sortable: true, filter: true, width: 100},
-        {field: "phone", sortable: true, filter: true, width: 150},
+        {field: "firstname", headerName: 'First Name', sortable: true, filter: true, width: 130},
+        {field: "lastname", headerName: 'Last Name',sortable: true, filter: true, width: 130},
+        {field: "streetaddress", headerName: 'Street',sortable: true, filter: true, width: 150},
+        {field: "postcode", headerName: 'Postcode',sortable: true, filter: true, width: 150},
+        {field: "city", sortable: true, filter: true, width: 110},
+        {field: "email", sortable: true, filter: true, width: 160},
+        {field: "phone", sortable: true, filter: true, width: 130},
         {
             headerName: '',
-            width: 100,
+            width: 60,
             field: 'links.href',
             cellRenderer: params => <Editcustomer  params={params} updateCustomer={updateCustomer} />
         },
         {
             headerName: '',
             field: "links.href", 
-            width: 100,
+            width: 60,
             cellRenderer: params => 
                 <IconButton color="error" onClick={() => deleteCustomer(params.value)}>
                     <DeleteIcon />
