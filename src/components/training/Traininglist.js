@@ -3,99 +3,102 @@ import { AgGridReact } from 'ag-grid-react';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Snackbar from '@mui/material/Snackbar';
+import Addtraining from './Addtraining';
+import Edittraining from './Edittraining';
 
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
 
 
 
-function CustomerList(){
+function Traininglist(){
 
-    const [cars, setCars] = useState([]);
+    const [trainings, setTrainings] = useState([]);
     const [open, setOpen] = React.useState(false);
 
-    //Fetch the list of cars after the first render
+    //Fetch the list of trainings after the first render
     useEffect(() => {
-        fetchCars();
+        fetchTrainings();
     }, []);
 
-    //Fetch the list of all cars
-    const fetchCars = () => {
-        fetch(process.env.REACT_APP_API_URL)
+    //Fetch the list of all trainings
+    const fetchTrainings = () => {
+        fetch("https://customerrest.herokuapp.com/api/trainings")
         .then(response => response.json())
-        .then(data => setCars(data._embedded.cars))
+        .then(data => setTrainings(data.content))
         .catch(err => console.log(err))
     }
 
-    //Sends a delete request to the server to delete the car
-    const deleteCar = (link) => {
-        if(window.confirm('Are you sure you want to delete this car?')){
+    //Sends a delete request to the server to delete the training
+    const deleteTraining = (link) => {
+        if(window.confirm('Are you sure you want to delete this training?')){
             fetch(link, {
                 method: 'DELETE'
             })
             .then(response => {
                 if(!response.ok){
-                    alert('Car could not be deleted');
+                    alert('Training could not be deleted');
                 }else
                 {   
                     setOpen(true);
-                    fetchCars();
+                    fetchTrainings();
                 }
             })
             .catch(err => console.log(err))
         }
     }
 
-    const addCar = (newCar) => {
-        fetch(process.env.REACT_APP_API_URL, {
+    const addTraining = (newTraining) => {
+        fetch("https://customerrest.herokuapp.com/api/trainings", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(newCar)
+            body: JSON.stringify(newTraining)
         })
         .then(response => {
             if(!response.ok){
-                alert('Car could not be added');
+                alert('Training could not be added');
             }else
             {
-                fetchCars();
+                fetchTrainings();
             }
         })
         .catch(err => console.log(err))
     }
 
-    const updateCar = (updatedCar, link) => {
+    const updateTraining = (updatedTraining, link) => {
         fetch(link, { 
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(updatedCar)
+            body: JSON.stringify(updatedTraining)
         })
         .then(response => {
             if(!response.ok){
-                alert('Car could not be updated');
+                alert('Training could not be updated');
             }else
             {
-                fetchCars();
+                fetchTrainings();
             }
         })
         .catch(err => console.log(err))
     }
 
     const [columns] = useState([
-        {field: "brand", sortable: true, filter: true, width: 150},
-        {field: "model", sortable: true, filter: true, width: 150},
-        {field: "color", sortable: true, filter: true, width: 100},
-        {field: "fuel", sortable: true, filter: true, width: 100},
-        {field: "year", sortable: true, filter: true, width: 100},
-        {field: "price", sortable: true, filter: true, width: 100},
+        {field: "date", sortable: true, filter: true, width: 150},
+        {field: "duration", sortable: true, filter: true, width: 150},
+        {field: "activity", sortable: true, filter: true, width: 200},
+        {field: "customer", sortable: true, filter: true, width: 200},
         {
-            
+            headerName: '',
+            width: 100,
+            field: '_links.self.href',
+            cellRenderer: params => <Edittraining  params={params} updateTraining={updateTraining} />
         },
         {
             headerName: '',
             field: "_links.self.href", 
             width: 100,
             cellRenderer: params => 
-                <IconButton color="error" onClick={() => deleteCar(params.value)}>
+                <IconButton color="error" onClick={() => deleteTraining(params.value)}>
                     <DeleteIcon />
                 </IconButton>
         }
@@ -104,10 +107,10 @@ function CustomerList(){
     return(
         <>
             &nbsp;
-      
+            <Addtraining addTraining={addTraining}/>
             <div className="ag-theme-material" style={{height: 600, width:1000}}>
                 <AgGridReact
-                    rowData={cars}
+                    rowData={trainings}
                     columnDefs={columns}
                     pagination={true}
                     paginationPageSize={10}
@@ -117,10 +120,14 @@ function CustomerList(){
                 open={open}
                 autoHideDuration={3000}
                 onClose={() => setOpen(false)}
-                message="Car was deleted successfully"
+                message="Training was deleted successfully"
             />
         </>
     );
 };
 
-export default CustomerList;
+
+export default Traininglist;
+
+
+
