@@ -11,7 +11,6 @@ import 'ag-grid-community/dist/styles/ag-theme-material.css';
 import dayjs from 'dayjs';
 
 
-
 function Traininglist(){
 
     const [trainings, setTrainings] = useState([]);
@@ -23,12 +22,26 @@ function Traininglist(){
     }, []);
 
     //Fetch the list of all trainings
-    const fetchTrainings = () => {
+    const fetchTrainings = async() => {
+        let temp_data;
         fetch("https://customerrest.herokuapp.com/api/trainings")
         .then(response => response.json())
-        .then(data => setTrainings(data.content))
+        .then(data => temp_data = data.content)
+        .then(async () => 
+        {
+            for(let i = 0; i < temp_data.length; i++){
+                let temp_element = {...temp_data[i]};
+                let url = temp_element.links[2].href;
+                await fetch(url)
+                .then(response => response.json())
+                .then(data => temp_element.links[0].href = data.firstname + " " + data.lastname)
+                .then(temp_data[i] = temp_element)
+                .catch(err => console.log(err))
+            }
+            setTrainings(temp_data)
+        })
         .catch(err => console.log(err))
-    }
+    } 
 
     //Sends a delete request to the server to delete the training
     const deleteTraining = (link) => {
@@ -102,7 +115,7 @@ function Traininglist(){
             filter: true, 
             width: 200,
             cellRenderer: params => {
-                return params.value[2].href;
+                return params.value[0].href;
             }
         },
         {
