@@ -11,12 +11,13 @@ import EditIcon from '@mui/icons-material/Edit';
 function Editcustomer({params, updateCustomer}) {
     const [open, setOpen] = useState(false);
     const [customer, setCustomer] = useState({
-        brand: '',
-        model: '',
-        color: '',
-        fuel: '',
-        year: '',
-        price: ''
+      firstname: '',
+      lastname: '',
+      email: '',
+      phone: '',
+      streetaddress: '',
+      postcode: '',
+      city: ''
     });
 
     const handleClickOpen = () => {

@@ -48,13 +48,14 @@ function Customerlist(){
         }
     }
 
-    //Adding a new customer to the list
+    //Adding a new customer to the list with POST
     const addCustomer = (newCustomer) => {
-        fetch("https://customerrest.herokuapp.com/api/customers", {
+        const requestOptions = {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(newCustomer)
-        })
+        };
+        fetch("https://customerrest.herokuapp.com/api/customers", requestOptions)
         .then(response => {
             if(!response.ok){
                 alert('Customer could not be added');

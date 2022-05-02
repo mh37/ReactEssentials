@@ -9,12 +9,13 @@ import DialogTitle from '@mui/material/DialogTitle';
 function Addcustomer({addCustomer}) {
     const [open, setOpen] = useState(false);
     const [customer, setCustomer] = useState({
-        brand: '',
-        model: '',
-        color: '',
-        fuel: '',
-        year: '',
-        price: ''
+        firstname: '',
+        lastname: '',
+        email: '',
+        phone: '',
+        streetaddress: '',
+        postcode: '',
+        city: ''
     });
 
     const handleClickOpen = () => {
@@ -47,55 +48,64 @@ function Addcustomer({addCustomer}) {
           <DialogContent>
             <TextField
               margin="dense"
-              name="brand"
-              value={customer.brand}
+              name="firstname"
+              value={customer.firstname}
               onChange={inputChanged}
-              label="Brand"
+              label="First Name"
               fullWidth
               variant="standard"
             />
             <TextField
               margin="dense"
-              name="model"
-              value={customer.model}
+              name="lastname"
+              value={customer.lastname}
               onChange={inputChanged}
-              label="Model"
+              label="Last Name"
               fullWidth
               variant="standard"
             />
             <TextField
               margin="dense"
-              name="color"
-              value={customer.color}
+              name="email"
+              value={customer.email}
               onChange={inputChanged}
-              label="Color"
+              label="Email"
               fullWidth
               variant="standard"
             />
             <TextField
               margin="dense"
-              name="fuel"
-              value={customer.fuel}
+              name="phone"
+              value={customer.phone}
               onChange={inputChanged}
-              label="Fuel"
+              label="Phone number"
               fullWidth
               variant="standard"
             />
             <TextField
               margin="dense"
-              name="year"
-              value={customer.year}
+              name="streetaddress"
+              value={customer.streetaddress}
               onChange={inputChanged}
-              label="Year"
+              label="Street Address"
               fullWidth
               variant="standard"
             />
             <TextField
               margin="dense"
-              name="price"
-              value={customer.price}
+              name="postcode"
+              value={customer.postcode}
               onChange={inputChanged}
-              label="Price"
+              label="Post Code"
+              fullWidth
+              variant="standard"
+            />
+            <TextField
+              margin="dense"
+              name="city"
+              value={customer.city}
+              onChange={inputChanged}
+              label="City"
               fullWidth
               variant="standard"
             />
