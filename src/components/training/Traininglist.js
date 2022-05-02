@@ -120,16 +120,16 @@ function Traininglist(){
         },
         {
             headerName: '',
-            width: 100,
-            field: '_links.self.href',
+            width: 60,
+            field: 'links',
             cellRenderer: params => <Edittraining  params={params} updateTraining={updateTraining} />
         },
         {
             headerName: '',
-            field: "_links.self.href", 
-            width: 100,
+            field: "links", 
+            width: 60,
             cellRenderer: params => 
-                <IconButton color="error" onClick={() => deleteTraining(params.value)}>
+                <IconButton color="error" onClick={() => deleteTraining(params.value[1].href)}>
                     <DeleteIcon />
                 </IconButton>
         }

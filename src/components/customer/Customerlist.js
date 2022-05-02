@@ -93,15 +93,15 @@ function Customerlist(){
         {
             headerName: '',
             width: 60,
-            field: 'links.href',
+            field: 'links',
             cellRenderer: params => <Editcustomer  params={params} updateCustomer={updateCustomer} />
         },
         {
             headerName: '',
-            field: "links.href", 
+            field: "links", 
             width: 60,
             cellRenderer: params => 
-                <IconButton color="error" onClick={() => deleteCustomer(params.value)}>
+                <IconButton color="error" onClick={() => deleteCustomer(params.value[0].href)}>
                     <DeleteIcon />
                 </IconButton>
         }
