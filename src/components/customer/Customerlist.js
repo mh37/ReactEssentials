@@ -86,7 +86,7 @@ function Customerlist(){
         {field: "firstname", headerName: 'First Name', sortable: true, filter: true, width: 130},
         {field: "lastname", headerName: 'Last Name',sortable: true, filter: true, width: 130},
         {field: "streetaddress", headerName: 'Street',sortable: true, filter: true, width: 150},
-        {field: "postcode", headerName: 'Postcode',sortable: true, filter: true, width: 150},
+        {field: "postcode", headerName: 'ZIP',sortable: true, filter: true, width: 90},
         {field: "city", sortable: true, filter: true, width: 110},
         {field: "email", sortable: true, filter: true, width: 160},
         {field: "phone", sortable: true, filter: true, width: 130},
@@ -111,7 +111,7 @@ function Customerlist(){
         <>
             &nbsp;
             <Addcustomer addCustomer={addCustomer}/>
-            <div className="ag-theme-material" style={{height: 600, width:1000}}>
+            <div className="ag-theme-material" style={{height: 700, width:"auto"}}>
                 <AgGridReact
                     rowData={customers}
                     columnDefs={columns}

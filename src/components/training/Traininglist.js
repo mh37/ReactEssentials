@@ -139,7 +139,7 @@ function Traininglist(){
         <>
             &nbsp;
             <Addtraining addTraining={addTraining}/>
-            <div className="ag-theme-material" style={{height: 600, width:1000}}>
+            <div className="ag-theme-material" style={{height: 700, width:"auto"}}>
                 <AgGridReact
                     rowData={trainings}
                     columnDefs={columns}
