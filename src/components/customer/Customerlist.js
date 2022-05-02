@@ -5,6 +5,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Snackbar from '@mui/material/Snackbar';
 import Addcustomer from './Addcustomer';
 import Editcustomer from './Editcustomer';
+import Addtraining from '../training/Addtraining';
 
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
@@ -67,6 +68,23 @@ function Customerlist(){
         .catch(err => console.log(err))
     }
 
+    const addTraining = (newTraining) => {
+        fetch("https://customerrest.herokuapp.com/api/trainings", {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(newTraining)
+        })
+        .then(response => {
+            if(!response.ok){
+                alert('Training could not be added');
+            }else
+            {
+                fetchCustomers();
+            }
+        })
+        .catch(err => console.log(err))
+    }
+
     //Updating an existing customers data
     const updateCustomer = (updatedCustomer, link) => {
         const requestOptions = {
@@ -94,6 +112,13 @@ function Customerlist(){
         {field: "city", sortable: true, filter: true, width: 110},
         {field: "email", sortable: true, filter: true, width: 160},
         {field: "phone", sortable: true, filter: true, width: 130},
+        {
+            headerName: '',
+            width: 60,
+            field: 'links',
+            cellRenderer: params => 
+                <Addtraining  params={params} addTraining={addTraining} />
+        },
         {
             headerName: '',
             width: 60,

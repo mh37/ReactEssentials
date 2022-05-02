@@ -3,7 +3,6 @@ import { AgGridReact } from 'ag-grid-react';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Snackbar from '@mui/material/Snackbar';
-import Addtraining from './Addtraining';
 
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
@@ -72,23 +71,6 @@ function Traininglist(){
         }
     }
 
-    const addTraining = (newTraining) => {
-        fetch("https://customerrest.herokuapp.com/api/trainings", {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(newTraining)
-        })
-        .then(response => {
-            if(!response.ok){
-                alert('Training could not be added');
-            }else
-            {
-                fetchTrainings();
-            }
-        })
-        .catch(err => console.log(err))
-    }
-
     const [columns] = useState([
         {
             field: "date", 
@@ -122,8 +104,6 @@ function Traininglist(){
 
     return(
         <>
-            &nbsp;
-            <Addtraining addTraining={addTraining}/>
             <div className="ag-theme-material" style={{height: 700, width:"auto"}}>
                 <AgGridReact
                     rowData={trainings}

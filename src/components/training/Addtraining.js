@@ -4,20 +4,29 @@ import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
+import IconButton from '@mui/material/IconButton';
+import AddIcon from '@mui/icons-material/Add';
 import DialogTitle from '@mui/material/DialogTitle';
 
-function Addtraining({addTraining}) {
+
+
+function Addtraining({params, addTraining}) {
     const [open, setOpen] = useState(false);
-    const [training, setTraining] = useState({
-        brand: '',
-        model: '',
-        color: '',
-        fuel: '',
-        year: '',
-        price: ''
+    const [customer, setCustomer] = useState({
+      customerName: params.data.firstname + " " + params.data.lastname,
+      customerLink: params.value[0].href
     });
 
-    const handleClickOpen = () => {
+    const [training, setTraining] = useState({
+        date: '',
+        activity: '',
+        duration: '',
+        customer: customer.customerLink
+    });
+
+
+    //Open the form for a new training and load customer data 
+    const handleClickOpen = () => {      
       setOpen(true);
     };
   
@@ -31,71 +40,56 @@ function Addtraining({addTraining}) {
     }
 
     const inputChanged = (event) => {
-        setTraining({
-            ...training,
-            [event.target.name]: event.target.value
-        });
+      setTraining({
+        ...training,
+        [event.target.name]: event.target.value
+      });          
     }
   
     return (
       <div>
-        <Button variant="outlined" onClick={handleClickOpen}>
-          Add Training
-        </Button>
+        <IconButton variant="outlined" onClick={handleClickOpen}>
+          <AddIcon />
+        </IconButton>
         <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>New Training</DialogTitle>
+          <DialogTitle>New Training for {customer.customerName}</DialogTitle>
           <DialogContent>
             <TextField
               margin="dense"
-              name="brand"
-              value={training.brand}
+              name="name"
+              value={customer.customerName}
+              fullWidth
+              disabled
+              variant="standard"
+            />
+            
+            <TextField
+              margin="dense"
+              name="date"
+              value={training.date}
               onChange={inputChanged}
-              label="Brand"
+              label="Date"
+              fullWidth
+              variant="standard"
+              InputLabelProps={{ shrink: true, required: true }}
+              type="date"
+            />
+
+            <TextField
+              margin="dense"
+              name="activity"
+              value={training.activity}
+              onChange={inputChanged}
+              label="Activity"
               fullWidth
               variant="standard"
             />
             <TextField
               margin="dense"
-              name="model"
-              value={training.model}
+              name="duration"
+              value={training.duration}
               onChange={inputChanged}
-              label="Model"
-              fullWidth
-              variant="standard"
-            />
-            <TextField
-              margin="dense"
-              name="color"
-              value={training.color}
-              onChange={inputChanged}
-              label="Color"
-              fullWidth
-              variant="standard"
-            />
-            <TextField
-              margin="dense"
-              name="fuel"
-              value={training.fuel}
-              onChange={inputChanged}
-              label="Fuel"
-              fullWidth
-              variant="standard"
-            />
-            <TextField
-              margin="dense"
-              name="year"
-              value={training.year}
-              onChange={inputChanged}
-              label="Year"
-              fullWidth
-              variant="standard"
-            />
-            <TextField
-              margin="dense"
-              name="price"
-              value={training.price}
-              onChange={inputChanged}
-              label="Price"
+              label="Duration (minutes)"
               fullWidth
               variant="standard"
             />
