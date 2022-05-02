@@ -4,7 +4,6 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Snackbar from '@mui/material/Snackbar';
 import Addtraining from './Addtraining';
-import Edittraining from './Edittraining';
 
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
@@ -21,7 +20,9 @@ function Traininglist(){
         fetchTrainings();
     }, []);
 
-    //Fetch the list of all trainings
+    //Replaced with a simpler API call for the moment. Keep this here in case it might come in useful later
+    //Fetch the list of all trainings with nested customer info query
+    /*
     const fetchTrainings = async() => {
         let temp_data;
         fetch("https://customerrest.herokuapp.com/api/trainings")
@@ -42,11 +43,20 @@ function Traininglist(){
         })
         .catch(err => console.log(err))
     } 
+    */
+
+    //Simplified fetch of trainings with custom info 
+    const fetchTrainings = () => {
+        fetch("https://customerrest.herokuapp.com/gettrainings")
+        .then(response => response.json())
+        .then(data => setTrainings(data))
+        .catch(err => console.log(err))
+    } 
 
     //Sends a delete request to the server to delete the training
-    const deleteTraining = (link) => {
+    const deleteTraining = (trainingId) => {
         if(window.confirm('Are you sure you want to delete this training?')){
-            fetch(link, {
+            fetch("https://customerrest.herokuapp.com/api/trainings/" + trainingId, {
                 method: 'DELETE'
             })
             .then(response => {
@@ -79,23 +89,6 @@ function Traininglist(){
         .catch(err => console.log(err))
     }
 
-    const updateTraining = (updatedTraining, link) => {
-        fetch(link, { 
-            method: 'PUT',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(updatedTraining)
-        })
-        .then(response => {
-            if(!response.ok){
-                alert('Training could not be updated');
-            }else
-            {
-                fetchTrainings();
-            }
-        })
-        .catch(err => console.log(err))
-    }
-
     const [columns] = useState([
         {
             field: "date", 
@@ -108,19 +101,20 @@ function Traininglist(){
         },
         {field: "duration", sortable: true, filter: true, width: 150},
         {field: "activity", sortable: true, filter: true, width: 200},
-        {field: "customer", sortable: true, filter: true, width: 200},
         {
-            headerName: '',
-            width: 60,
-            field: 'links',
-            cellRenderer: params => <Edittraining  params={params} updateTraining={updateTraining} />
+            field: "customer", 
+            sortable: true, 
+            filter: true, 
+            width: 200,
+            cellRenderer: params => 
+                params.value.firstname + " " + params.value.lastname
         },
         {
             headerName: '',
-            field: "links", 
+            field: "id", 
             width: 60,
             cellRenderer: params => 
-                <IconButton color="error" onClick={() => deleteTraining(params.value[0].href)}>
+                <IconButton color="error" onClick={() => deleteTraining(params.value)}>
                     <DeleteIcon />
                 </IconButton>
         }
