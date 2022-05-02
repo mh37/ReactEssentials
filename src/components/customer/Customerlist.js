@@ -48,6 +48,7 @@ function Customerlist(){
         }
     }
 
+    //Adding a new customer to the list
     const addCustomer = (newCustomer) => {
         fetch("https://customerrest.herokuapp.com/api/customers", {
             method: 'POST',
@@ -65,6 +66,7 @@ function Customerlist(){
         .catch(err => console.log(err))
     }
 
+    //Updating an existing customers data
     const updateCustomer = (updatedCustomer, link) => {
         fetch(link, { 
             method: 'PUT',
