@@ -34,7 +34,7 @@ function Traininglist(){
                 let url = temp_element.links[2].href;
                 await fetch(url)
                 .then(response => response.json())
-                .then(data => temp_element.links[0].href = data.firstname + " " + data.lastname)
+                .then(data => temp_element.customer = data.firstname + " " + data.lastname)
                 .then(temp_data[i] = temp_element)
                 .catch(err => console.log(err))
             }
@@ -108,16 +108,7 @@ function Traininglist(){
         },
         {field: "duration", sortable: true, filter: true, width: 150},
         {field: "activity", sortable: true, filter: true, width: 200},
-        {
-            headerName: 'Customer',
-            field: 'links', 
-            sortable: true, 
-            filter: true, 
-            width: 200,
-            cellRenderer: params => {
-                return params.value[0].href;
-            }
-        },
+        {field: "customer", sortable: true, filter: true, width: 200},
         {
             headerName: '',
             width: 60,
@@ -129,7 +120,7 @@ function Traininglist(){
             field: "links", 
             width: 60,
             cellRenderer: params => 
-                <IconButton color="error" onClick={() => deleteTraining(params.value[1].href)}>
+                <IconButton color="error" onClick={() => deleteTraining(params.value[0].href)}>
                     <DeleteIcon />
                 </IconButton>
         }
