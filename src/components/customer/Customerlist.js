@@ -69,11 +69,12 @@ function Customerlist(){
 
     //Updating an existing customers data
     const updateCustomer = (updatedCustomer, link) => {
-        fetch(link, { 
+        const requestOptions = {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(updatedCustomer)
-        })
+        };
+        fetch(link, requestOptions)
         .then(response => {
             if(!response.ok){
                 alert('Customer could not be updated');
@@ -97,7 +98,8 @@ function Customerlist(){
             headerName: '',
             width: 60,
             field: 'links',
-            cellRenderer: params => <Editcustomer  params={params} updateCustomer={updateCustomer} />
+            cellRenderer: params => 
+                <Editcustomer  params={params} updateCustomer={updateCustomer} />
         },
         {
             headerName: '',

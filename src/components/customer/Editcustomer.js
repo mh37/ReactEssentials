@@ -22,12 +22,13 @@ function Editcustomer({params, updateCustomer}) {
 
     const handleClickOpen = () => {
         setCustomer ({
-            brand: params.data.brand,
-            model: params.data.model,
-            color: params.data.color,
-            fuel: params.data.fuel,
-            year: params.data.year,
-            price: params.data.price
+            firstname: params.data.firstname,
+            lastname: params.data.lastname,
+            email: params.data.email,
+            phone: params.data.phone,
+            streetaddress: params.data.streetaddress,
+            postcode: params.data.postcode,
+            city: params.data.city
         });
         setOpen(true);
     };
@@ -37,7 +38,7 @@ function Editcustomer({params, updateCustomer}) {
     };
 
     const handleSave = () => {
-        updateCustomer(customer, params.value);
+        updateCustomer(customer, params.value[0].href);
         setOpen(false);
     }
 
@@ -58,55 +59,64 @@ function Editcustomer({params, updateCustomer}) {
           <DialogContent>
             <TextField
               margin="dense"
-              name="brand"
-              value={customer.brand}
+              name="firstname"
+              value={customer.firstname}
               onChange={inputChanged}
-              label="Brand"
+              label="First Name"
               fullWidth
               variant="standard"
             />
             <TextField
               margin="dense"
-              name="model"
-              value={customer.model}
+              name="lastname"
+              value={customer.lastname}
               onChange={inputChanged}
-              label="Model"
+              label="Last name"
               fullWidth
               variant="standard"
             />
             <TextField
               margin="dense"
-              name="color"
-              value={customer.color}
+              name="email"
+              value={customer.email}
               onChange={inputChanged}
-              label="Color"
+              label="Email"
               fullWidth
               variant="standard"
             />
             <TextField
               margin="dense"
-              name="fuel"
-              value={customer.fuel}
+              name="phone"
+              value={customer.phone}
               onChange={inputChanged}
-              label="Fuel"
+              label="Phone"
               fullWidth
               variant="standard"
             />
             <TextField
               margin="dense"
-              name="year"
-              value={customer.year}
+              name="streetaddress"
+              value={customer.streetaddress}
               onChange={inputChanged}
-              label="Year"
+              label="Street Address"
               fullWidth
               variant="standard"
             />
             <TextField
               margin="dense"
-              name="price"
-              value={customer.price}
+              name="postcode"
+              value={customer.postcode}
               onChange={inputChanged}
-              label="Price"
+              label="Post Code"
+              fullWidth
+              variant="standard"
+            />
+            <TextField
+              margin="dense"
+              name="city"
+              value={customer.city}
+              onChange={inputChanged}
+              label="City"
               fullWidth
               variant="standard"
             />
