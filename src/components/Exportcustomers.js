@@ -1,11 +1,21 @@
-
+import React, {useState} from 'react';
+import Button from '@mui/material/Button';
 
 function ExportCustomers(){
 
-    return ( 
-        <div>
+    const handleClickExportButton = () => {
+        console.log('Export button clicked');
+    }
+     
 
-        </div>
+    return ( 
+        <>
+        
+            <Button variant="contained" onClick={handleClickExportButton}>
+            Export Customers
+            </Button>
+       
+        </>
     );
 }
 
