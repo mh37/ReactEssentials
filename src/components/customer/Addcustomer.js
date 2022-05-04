@@ -40,7 +40,7 @@ function Addcustomer({addCustomer}) {
   
     return (
       <div>
-        <Button variant="outlined" onClick={handleClickOpen}>
+        <Button variant="contained" onClick={handleClickOpen}>
           Add Customer
         </Button>
         <Dialog open={open} onClose={handleClose}>
