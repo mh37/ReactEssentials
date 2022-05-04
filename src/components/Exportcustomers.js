@@ -10,11 +10,9 @@ function ExportCustomers(){
 
     return ( 
         <>
-        
             <Button variant="contained" onClick={handleClickExportButton}>
             Export Customers
             </Button>
-       
         </>
     );
 }
