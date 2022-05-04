@@ -6,7 +6,6 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Traininglist from './training/Traininglist';
 import Customerlist from './customer/Customerlist';
-import Exportcustomers from './Exportcustomers';
 import Statistics from './Statistics';
 import Calendar from './Calendar';
 
@@ -58,7 +57,6 @@ function NavTabs() {
           <Tab label="Trainings" {...a11yProps(1)} />
           <Tab label="Calendar" {...a11yProps(2)} />
           <Tab label="Statistics" {...a11yProps(3)} />
-          <Tab label="Export" {...a11yProps(4)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
@@ -72,9 +70,6 @@ function NavTabs() {
       </TabPanel>
       <TabPanel value={value} index={3}>
         <Statistics />
-      </TabPanel>
-      <TabPanel value={value} index={4}>
-        <Exportcustomers />
       </TabPanel>
     </Box>
   );

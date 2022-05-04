@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6">
+          <Typography component={'span'} variant="h6">
             TrainingCenter
           </Typography>
         </Toolbar>

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback, useMemo, useRef} from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -6,6 +6,7 @@ import Snackbar from '@mui/material/Snackbar';
 import Addcustomer from './Addcustomer';
 import Editcustomer from './Editcustomer';
 import Addtraining from '../training/Addtraining';
+import { render } from 'react-dom';
 
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
@@ -16,6 +17,7 @@ function Customerlist(){
 
     const [customers, setCustomers] = useState([]);
     const [open, setOpen] = React.useState(false);
+    const gridRef = useRef();
 
     //Fetch the list of customers after the first render
     useEffect(() => {
@@ -104,6 +106,19 @@ function Customerlist(){
         .catch(err => console.log(err))
     }
 
+    const onBtnExport = useCallback(() => {
+        gridRef.current.api.exportDataAsCsv();
+      }, []);
+
+    const defaultColDef = useMemo(() => {
+        return {
+            editable: true,
+            resizable: true,
+            minWidth: 100,
+            flex: 1,
+        };
+    }, []);
+
     const [columns] = useState([
         {field: "firstname", headerName: 'First Name', sortable: true, filter: true, width: 130},
         {field: "lastname", headerName: 'Last Name',sortable: true, filter: true, width: 130},
@@ -137,16 +152,25 @@ function Customerlist(){
         }
     ]);
 
+    const popupParent = useMemo(() => {
+        return document.body;
+      }, []);
+
     return(
         <>
             &nbsp;
             <Addcustomer addCustomer={addCustomer}/>
+            <button onClick={onBtnExport}>Download CSV export file</button>
             <div className="ag-theme-material" style={{height: 700, width:"auto"}}>
                 <AgGridReact
                     rowData={customers}
                     columnDefs={columns}
                     pagination={true}
                     paginationPageSize={10}
+                    defaultColDef={defaultColDef}
+                    suppressExcelExport={true}
+                    popupParent={popupParent}
+                    ref={gridRef}
                 />
             </div>
             <Snackbar
