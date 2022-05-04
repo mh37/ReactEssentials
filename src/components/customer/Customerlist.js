@@ -1,11 +1,13 @@
 import React, {useState, useEffect, useCallback, useMemo, useRef} from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import IconButton from '@mui/material/IconButton';
+import DownloadIcon from '@mui/icons-material/Download';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Snackbar from '@mui/material/Snackbar';
 import Addcustomer from './Addcustomer';
 import Editcustomer from './Editcustomer';
 import Addtraining from '../training/Addtraining';
+import Button from '@mui/material/Button';
 import { render } from 'react-dom';
 
 import 'ag-grid-community/dist/styles/ag-grid.css';
@@ -106,8 +108,14 @@ function Customerlist(){
         .catch(err => console.log(err))
     }
 
+    const getParams = () => {
+        return {
+            columnKeys: ['firstname', 'lastname', 'streetaddress', 'postcode', 'city', 'email', 'phone'],
+        };
+    };
+
     const onBtnExport = useCallback(() => {
-        gridRef.current.api.exportDataAsCsv();
+        gridRef.current.api.exportDataAsCsv(getParams());
       }, []);
 
     const defaultColDef = useMemo(() => {
@@ -158,9 +166,11 @@ function Customerlist(){
 
     return(
         <>
-            &nbsp;
             <Addcustomer addCustomer={addCustomer}/>
-            <button onClick={onBtnExport}>Download CSV export file</button>
+            &nbsp;
+            <Button variant="outlined" onClick={onBtnExport} startIcon={<DownloadIcon />}>
+                Export
+            </Button>
             <div className="ag-theme-material" style={{height: 700, width:"auto"}}>
                 <AgGridReact
                     rowData={customers}
