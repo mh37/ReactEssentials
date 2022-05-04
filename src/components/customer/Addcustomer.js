@@ -39,7 +39,7 @@ function Addcustomer({addCustomer}) {
     }
   
     return (
-      <div>
+      <>
         <Button variant="contained" onClick={handleClickOpen}>
           Add Customer
         </Button>
@@ -115,7 +115,7 @@ function Addcustomer({addCustomer}) {
             <Button onClick={handleSave}>Save</Button>
           </DialogActions>
         </Dialog>
-      </div>
+      </>
     );
 }
 
