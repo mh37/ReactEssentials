@@ -2,9 +2,9 @@
 function Statistics()   {
 
     return ( 
-        <div>
+        <>
 
-        </div>
+        </>
     );
 }
 
