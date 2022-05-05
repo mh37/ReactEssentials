@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import Traininglist from './training/Traininglist';
 import Customerlist from './customer/Customerlist';
 import Statistics from './Statistics';
-import Calendar from './Calendar';
+import TrainingCalendar from './TrainingCalendar';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -66,7 +66,7 @@ function NavTabs() {
         <Traininglist />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <Calendar />
+        <TrainingCalendar />
       </TabPanel>
       <TabPanel value={value} index={3}>
         <Statistics />
