@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import Traininglist from './training/Traininglist';
 import Customerlist from './customer/Customerlist';
 import Statistics from './Statistics';
-import TrainingCalendar from './TrainingCalendar';
+import TrainingCalendar from './training/TrainingCalendar';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
