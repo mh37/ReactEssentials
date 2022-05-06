@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { BarChart, Bar, CartesianGrid, XAxis, YAxis } from 'recharts';
+import { BarChart, Bar, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -19,6 +19,7 @@ function TrainingStatistics({params})   {
       lastname: ''
     });
 
+    //Fetches the training data for the specific customer
     const fetchTrainings = () => {
         fetch(params.data.links[2].href)
         .then(response => response.json())
@@ -31,6 +32,7 @@ function TrainingStatistics({params})   {
         .catch(err => console.log(err))
     } 
 
+    //Opens the dialog and sets the customer name, then fetches the trainings and opens the dialog
     const handleClickOpen = () => {
         setCustomer ({
             firstname: params.data.firstname,
@@ -42,10 +44,12 @@ function TrainingStatistics({params})   {
         setOpen(true);
     };
   
+    //Closes the dialog
     const handleClose = () => {
       setOpen(false);
     };
 
+    //Sanitze the data and merging duplicate categories and summing the value
     const sanitizeData = (data) => {
         return(
             _(data)
@@ -74,14 +78,14 @@ function TrainingStatistics({params})   {
             fullWidth
             maxWidth="lg"
         >
-            <DialogTitle>{customer.firstname + " " + customer.lastname}</DialogTitle>
+            <DialogTitle><b>Training Summary:</b> {customer.firstname + " " + customer.lastname}</DialogTitle>
             <DialogContent>
                 {customer.link}
                 <BarChart width={600} height={600} data={sanitizeData(trainingData)}>
-                    <Bar dataKey="duration" fill="blue" />
-                    <CartesianGrid stroke="#ccc" />
+                    <Bar dataKey="duration" fill="#8884d8" />
                     <XAxis dataKey="name" />
-                    <YAxis />
+                    <YAxis label={{ value: 'Duration (min)', angle: -90, position: 'insideLeft' }} />
+                    <Tooltip />
                 </BarChart>
             </DialogContent>
             <DialogActions>
