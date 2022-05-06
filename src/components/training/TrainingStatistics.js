@@ -1,7 +1,4 @@
-//https://github.com/recharts/recharts
-//https://lodash.com/
-
-import React, {Fragment, useState, useContext} from 'react';
+import React, {useState} from 'react';
 import { BarChart, Bar, CartesianGrid, XAxis, YAxis } from 'recharts';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';

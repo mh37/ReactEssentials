@@ -8,7 +8,6 @@ import Addcustomer from './Addcustomer';
 import Editcustomer from './Editcustomer';
 import Addtraining from '../training/Addtraining';
 import Button from '@mui/material/Button';
-import { render } from 'react-dom';
 
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
