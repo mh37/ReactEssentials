@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useMemo} from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -44,7 +44,7 @@ function Traininglist(){
     } 
     */
 
-    //Simplified fetch of trainings with custom info 
+    //Simplified fetch of trainings which includes the customer info 
     const fetchTrainings = () => {
         fetch("https://customerrest.herokuapp.com/gettrainings")
         .then(response => response.json())
@@ -71,30 +71,38 @@ function Traininglist(){
         }
     }
 
+    //default column definition for AG Grid
+    const defaultColDef = useMemo(() => {
+        return {
+            editable: true,
+            resizable: true,
+            flex: 1
+        };
+    }, []);
+
+    //column definitions for AG Grid
     const [columns] = useState([
         {
             field: "date", 
             sortable: true, 
             filter: true, 
-            width: 150,
             cellRenderer: params => {
                 return dayjs(params.value).format('DD/MM/YYYY');
             }
         },
-        {field: "duration", sortable: true, filter: true, width: 150},
-        {field: "activity", sortable: true, filter: true, width: 200},
+        {field: "duration", sortable: true, filter: true},
+        {field: "activity", sortable: true, filter: true},
         {
             field: "customer", 
             sortable: true, 
             filter: true, 
-            width: 200,
             cellRenderer: params => 
                 params.value.firstname + " " + params.value.lastname
         },
         {
             headerName: '',
             field: "id", 
-            width: 60,
+            width: 100,
             cellRenderer: params => 
                 <IconButton color="error" onClick={() => deleteTraining(params.value)}>
                     <DeleteIcon />
@@ -104,10 +112,11 @@ function Traininglist(){
 
     return(
         <>
-            <div className="ag-theme-material" style={{height: 700, width:"auto"}}>
+            <div className="ag-theme-material" style={{height: 600, width:"auto"}}>
                 <AgGridReact
                     rowData={trainings}
                     columnDefs={columns}
+                    defaultColDef={defaultColDef}
                     pagination={true}
                     paginationPageSize={10}
                 />
