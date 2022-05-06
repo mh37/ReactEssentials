@@ -4,7 +4,6 @@ import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import DialogTitle from '@mui/material/DialogTitle';
 
@@ -25,20 +24,23 @@ function Addtraining({params, addTraining}) {
     });
 
 
-    //Open the form for a new training and load customer data 
+    //Open the dialog for a new training  
     const handleClickOpen = () => {      
       setOpen(true);
     };
   
+    //Close the form
     const handleClose = () => {
       setOpen(false);
     };
 
+    //Add the new training and close the dialog
     const handleSave = () => {
         addTraining(training);
         setOpen(false);
     }
 
+    //Event handler for the text fields
     const inputChanged = (event) => {
       setTraining({
         ...training,
@@ -48,9 +50,10 @@ function Addtraining({params, addTraining}) {
   
     return (
       <div>
-        <IconButton variant="outlined" onClick={handleClickOpen}>
-          <AddIcon />
-        </IconButton>
+
+        <Button variant="contained" color="success" size="small" onClick={handleClickOpen} startIcon={<AddIcon />}>
+          Training
+        </Button>
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>New Training for {customer.customerName}</DialogTitle>
           <DialogContent>

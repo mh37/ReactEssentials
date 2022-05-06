@@ -20,6 +20,7 @@ function Editcustomer({params, updateCustomer}) {
       city: ''
     });
 
+    // Open the dialog and set the customer values
     const handleClickOpen = () => {
         setCustomer ({
             firstname: params.data.firstname,
@@ -33,15 +34,18 @@ function Editcustomer({params, updateCustomer}) {
         setOpen(true);
     };
   
+    // Close the dialog
     const handleClose = () => {
       setOpen(false);
     };
 
+    // Update the customer, close the dialog and save the changes
     const handleSave = () => {
         updateCustomer(customer, params.value[0].href);
         setOpen(false);
     }
 
+    //Event handler for the text fields
     const inputChanged = (event) => {
         setCustomer({
             ...customer,
@@ -51,7 +55,7 @@ function Editcustomer({params, updateCustomer}) {
   
     return (
       <div>
-        <IconButton variant="outlined" onClick={handleClickOpen}>
+        <IconButton color="primary" onClick={handleClickOpen}>
           <EditIcon />
         </IconButton>
         <Dialog open={open} onClose={handleClose}>

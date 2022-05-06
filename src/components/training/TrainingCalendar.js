@@ -11,17 +11,19 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 
 function TrainingCalendar(){
 
+  //Initialize the state
   useEffect(() => {
     fetchTrainings()
   });
 
+  //Set the locales for the calendar
   const locales = {
     'en-GB': enGB,
   }
 
   const [trainings, setTrainings] = useState([]);
 
-  //Simplified fetch of trainings with custom info 
+  //Fetch of trainings including the customer info 
   const fetchTrainings = () => {
     fetch("https://customerrest.herokuapp.com/gettrainings")
     .then(response => response.json())
@@ -29,6 +31,7 @@ function TrainingCalendar(){
     .catch(err => console.log(err))
   } 
 
+  //List with mapped trainings for the calendar
   const eventList = trainings.map((training)=>{
     const endDate = moment(training.date).add(training.duration, 'minutes');
     return {
@@ -38,6 +41,7 @@ function TrainingCalendar(){
     }
   })
 
+  //Localizer config for the calendar
   const localizer = dateFnsLocalizer({
     format,
     parse,
@@ -50,7 +54,7 @@ function TrainingCalendar(){
     <Calendar
         localizer={localizer}
         defaultDate={new Date()}
-        defaultView="week"
+        defaultView="month"
         events={eventList}
         startAccessor="start"
         endAccessor="end"
