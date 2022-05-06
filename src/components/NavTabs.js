@@ -6,8 +6,8 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Traininglist from './training/Traininglist';
 import Customerlist from './customer/Customerlist';
-import Statistics from './Statistics';
 import TrainingCalendar from './training/TrainingCalendar';
+import TrainingStatistics from './training/TrainingStatistics';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -69,7 +69,7 @@ function NavTabs() {
         <TrainingCalendar />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <Statistics />
+        <TrainingStatistics />
       </TabPanel>
     </Box>
   );
