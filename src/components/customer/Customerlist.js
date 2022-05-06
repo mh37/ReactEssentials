@@ -72,6 +72,7 @@ function Customerlist(){
         .catch(err => console.log(err))
     }
 
+    //Adding a new training to the list with POST
     const addTraining = (newTraining) => {
         fetch("https://customerrest.herokuapp.com/api/trainings", {
             method: 'POST',
@@ -114,53 +115,53 @@ function Customerlist(){
         };
     };
 
+    //Export functionality for export button
     const onBtnExport = useCallback(() => {
         gridRef.current.api.exportDataAsCsv(getParams());
       }, []);
 
+    //default column definition for AG Grid
     const defaultColDef = useMemo(() => {
         return {
             editable: true,
-            resizable: true,
-            minWidth: 100,
-            flex: 1,
+            resizable: true
         };
     }, []);
 
-
+    //column definitions for AG Grid
     const [columns] = useState([
         {
             headerName: '',
-            width: 60,
+            width: 70,
             field: 'links',
             cellRenderer: params => 
                 <TrainingStatistics  params={params} />
         },
-        {field: "firstname", headerName: 'First Name', sortable: true, filter: true, width: 130},
-        {field: "lastname", headerName: 'Last Name',sortable: true, filter: true, width: 130},
-        {field: "streetaddress", headerName: 'Street',sortable: true, filter: true, width: 150},
-        {field: "postcode", headerName: 'ZIP',sortable: true, filter: true, width: 90},
-        {field: "city", sortable: true, filter: true, width: 110},
-        {field: "email", sortable: true, filter: true, width: 160},
-        {field: "phone", sortable: true, filter: true, width: 130},
+        {field: "firstname", headerName: 'First Name', sortable: true, filter: true, flex: 1},
+        {field: "lastname", headerName: 'Last Name',sortable: true, filter: true, flex: 1},
+        {field: "streetaddress", headerName: 'Street',sortable: true, filter: true, flex: 2},
+        {field: "postcode", headerName: 'ZIP',sortable: true, filter: true, flex: 1},
+        {field: "city", sortable: true, filter: true, flex: 1},
+        {field: "email", sortable: true, filter: true, flex: 2},
+        {field: "phone", sortable: true, filter: true, flex: 2},
         {
             headerName: '',
-            width: 60,
+            width: 140,
             field: 'links',
             cellRenderer: params => 
                 <Addtraining  params={params} addTraining={addTraining} />
         },
         {
             headerName: '',
-            width: 60,
             field: 'links',
+            width: 70,
             cellRenderer: params => 
                 <Editcustomer  params={params} updateCustomer={updateCustomer} />
         },
         {
             headerName: '',
             field: "links", 
-            width: 60,
+            width: 70,
             cellRenderer: params => 
                 <IconButton color="error" onClick={() => deleteCustomer(params.value[0].href)}>
                     <DeleteIcon />
@@ -175,11 +176,11 @@ function Customerlist(){
     return(
         <>
             <Addcustomer addCustomer={addCustomer}/>
-            &nbsp;
+            &nbsp;&nbsp;&nbsp;
             <Button variant="outlined" onClick={onBtnExport} startIcon={<DownloadIcon />}>
                 Export
             </Button>
-            <div className="ag-theme-material" style={{height: 700, width:"auto"}}>
+            <div className="ag-theme-material" style={{height: 600, width:"auto"}}>
                 <AgGridReact
                     rowData={customers}
                     columnDefs={columns}
