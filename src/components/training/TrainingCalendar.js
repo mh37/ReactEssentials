@@ -50,7 +50,7 @@ function TrainingCalendar(){
     <Calendar
         localizer={localizer}
         defaultDate={new Date()}
-        defaultView="month"
+        defaultView="week"
         events={eventList}
         startAccessor="start"
         endAccessor="end"
