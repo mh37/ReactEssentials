@@ -76,12 +76,12 @@ function TrainingStatistics({params})   {
             open={open} 
             onClose={handleClose}
             fullWidth
-            maxWidth="lg"
+            maxWidth="md"
         >
             <DialogTitle><b>Training Summary:</b> {customer.firstname + " " + customer.lastname}</DialogTitle>
             <DialogContent>
                 {customer.link}
-                <BarChart width={600} height={600} data={sanitizeData(trainingData)}>
+                <BarChart width={800} height={400} data={sanitizeData(trainingData)}>
                     <Bar dataKey="duration" fill="#8884d8" />
                     <XAxis dataKey="name" />
                     <YAxis label={{ value: 'Duration (min)', angle: -90, position: 'insideLeft' }} />
