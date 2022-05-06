@@ -128,7 +128,15 @@ function Customerlist(){
         };
     }, []);
 
+
     const [columns] = useState([
+        {
+            headerName: '',
+            width: 60,
+            field: 'links',
+            cellRenderer: params => 
+                <TrainingStatistics  params={params} />
+        },
         {field: "firstname", headerName: 'First Name', sortable: true, filter: true, width: 130},
         {field: "lastname", headerName: 'Last Name',sortable: true, filter: true, width: 130},
         {field: "streetaddress", headerName: 'Street',sortable: true, filter: true, width: 150},
