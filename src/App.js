@@ -4,7 +4,6 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import NavTabs from './components/NavTabs';
-import ContextProvider from './context/ContextProvider';
 
 
 function App() {
@@ -18,9 +17,8 @@ function App() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <ContextProvider>
-        <NavTabs />
-      </ContextProvider>
+        
+      <NavTabs />
     </div>
   );
 }

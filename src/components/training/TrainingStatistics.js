@@ -1,21 +1,13 @@
 //https://github.com/recharts/recharts
 //https://lodash.com/
 
-import React, {useState} from 'react';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import IconButton from '@mui/material/IconButton';
-import EditIcon from '@mui/icons-material/Edit';
+import React, {Fragment, useState, useContext} from 'react';
 import { BarChart, Bar, CartesianGrid, XAxis, YAxis } from 'recharts';
 
-function TrainingStatistics({params})   {
+function TrainingStatistics()   {
 
-    const [open, setOpen] = useState(false)
     const [trainings, setTrainings] = useState([]);
+
 
     const data = [
         {name: 'Geeksforgeeks', students: 400},
@@ -32,7 +24,6 @@ function TrainingStatistics({params})   {
         .catch(err => console.log(err))
     } 
      
-      
     return ( 
         <>
             <b>Select a customer in the overview to see their training statistics</b>
