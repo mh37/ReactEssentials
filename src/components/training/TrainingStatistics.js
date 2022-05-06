@@ -16,18 +16,16 @@ import _ from 'lodash';
 function TrainingStatistics({params})   {
 
     const [trainingData, setTrainingData] = useState([]);
-    const [barData, setBarData] = useState([]);
     const [open, setOpen] = useState(false);
     const [customer, setCustomer] = useState({
       firstname: '',
-      lastname: '',
-      link: ''
+      lastname: ''
     });
 
     const fetchTrainings = () => {
-        fetch("https://customerrest.herokuapp.com/gettrainings")
+        fetch(params.data.links[2].href)
         .then(response => response.json())
-        .then(data => setTrainingData(data.map(training => {
+        .then(data => setTrainingData(data.content.map(training => {
             return {
                 name: training.activity,
                 duration: training.duration
@@ -40,7 +38,6 @@ function TrainingStatistics({params})   {
         setCustomer ({
             firstname: params.data.firstname,
             lastname: params.data.lastname,
-            link: params.data.links[2].href
         });
 
         fetchTrainings();
