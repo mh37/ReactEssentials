@@ -99,7 +99,7 @@ function Traininglist(){
                 return dayjs(params.value).subtract(3, 'hour').format('HH:mm');  //Subtract 3 hours to get the time in the correct format without messing with timezones (this is a bad solution, should be fixed later)
             }
         },
-        {field: "duration", sortable: true, filter: true},
+        {field: "duration", headerName:'Duration (min)', sortable: true, filter: true},
         {field: "activity", sortable: true, filter: true},
         {
             field: "customer", 
