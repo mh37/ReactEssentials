@@ -90,6 +90,15 @@ function Traininglist(){
                 return dayjs(params.value).format('DD/MM/YYYY');
             }
         },
+        {
+            headerName: "Time",
+            field: "date", 
+            sortable: true, 
+            filter: true, 
+            cellRenderer: params => {
+                return dayjs(params.value).format('HH:mm');
+            }
+        },
         {field: "duration", sortable: true, filter: true},
         {field: "activity", sortable: true, filter: true},
         {

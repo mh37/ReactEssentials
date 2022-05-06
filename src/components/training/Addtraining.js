@@ -75,7 +75,7 @@ function Addtraining({params, addTraining}) {
               fullWidth
               variant="standard"
               InputLabelProps={{ shrink: true, required: true }}
-              type="date"
+              type="datetime-local"
             />
 
             <TextField
