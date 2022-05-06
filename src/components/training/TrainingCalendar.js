@@ -32,11 +32,13 @@ function TrainingCalendar(){
   } 
 
   //List with mapped trainings for the calendar
+  //The substraction of 3 hours is to compensate for the wrong timezone. This is a very bad practice, this should be fixed in the future with a more elegant solution
   const eventList = trainings.map((training)=>{
-    const endDate = moment(training.date).add(training.duration, 'minutes');
+    const endDate = moment(training.date).add(training.duration, 'minutes').subtract(3,'hours');
     return {
       title: training.activity + " / " + training.customer.firstname + " " + training.customer.lastname,
-      start: new Date(training.date),
+      //start: new Date(training.date),
+      start: new Date(moment(training.date).subtract(3,'hours')),
       end: new Date(endDate) 
     }
   })

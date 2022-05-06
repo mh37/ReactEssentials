@@ -96,7 +96,7 @@ function Traininglist(){
             sortable: true, 
             filter: true, 
             cellRenderer: params => {
-                return dayjs(params.value).format('HH:mm');
+                return dayjs(params.value).subtract(3, 'hour').format('HH:mm');  //Subtract 3 hours to get the time in the correct format without messing with timezones (this is a bad solution, should be fixed later)
             }
         },
         {field: "duration", sortable: true, filter: true},
