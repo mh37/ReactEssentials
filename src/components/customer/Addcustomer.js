@@ -18,19 +18,23 @@ function Addcustomer({addCustomer}) {
         city: ''
     });
 
+    //open the dialog box
     const handleClickOpen = () => {
       setOpen(true);
     };
   
+    //close the dialog box
     const handleClose = () => {
       setOpen(false);
     };
 
+    //handle the new customer saving
     const handleSave = () => {
         addCustomer(customer);
         setOpen(false);
     }
 
+    //handle the input changes
     const inputChanged = (event) => {
         setCustomer({
             ...customer,
