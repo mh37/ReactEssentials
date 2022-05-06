@@ -56,7 +56,6 @@ function NavTabs() {
           <Tab label="Customers" {...a11yProps(0)} />
           <Tab label="Trainings" {...a11yProps(1)} />
           <Tab label="Calendar" {...a11yProps(2)} />
-          <Tab label="Statistics" {...a11yProps(3)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
@@ -67,9 +66,6 @@ function NavTabs() {
       </TabPanel>
       <TabPanel value={value} index={2}>
         <TrainingCalendar />
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        <TrainingStatistics />
       </TabPanel>
     </Box>
   );
